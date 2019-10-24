@@ -1,0 +1,59 @@
+{
+  "id": "file:/api/v1/movie.json#",
+  "type": "object",
+  "required": ["attributes", "relationships"],
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "required": [
+        "average_rating",
+        "current_user_rating",
+        "description",
+        "id",
+        "image_url",
+        "ratings",
+        "title",
+        "visible"
+      ],
+      "properties": {
+        "average_rating": { "type": ["string", "null"] },
+        "current_user_rating": { "type": ["number", "null"] },
+        "description": { "type": "string" },
+        "id": { "type": "integer" },
+        "image_url": { "type": "string" },
+        "ratings": {
+          "type": "array",
+          "items": {
+            "$ref": "file:/api/v1/rating.json#"
+          }
+        },
+        "title": { "type": "string" },
+        "visible": { "type": "boolean" }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "required": ["category", "ratings"],
+      "properties": {
+        "category": {
+          "type": "object",
+          "required": ["data"],
+          "properties": {
+            "data": {
+              "type": "object"
+            }
+          }
+        },
+        "ratings": {
+          "type": "object",
+          "required": ["data"],
+          "properties": {
+            "data": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<div class="ui very padded vertical stripe segment">
+  <div class="ui vertically padded grid">
+    <div class="column">
+      <div class="ui container">
+        <form class="ui form" {{action "create" on="submit"}}>
+          <h2 class="ui dividing header">Add New Movie</h2>
+          <div class="field">
+            <div class="two fields">
+              <div class="field {{if errors.title "error"}}">
+                <label>Title</label>{{input value=model.title placeholder="Movie Title"}}
+                {{#if errors.title}}
+                  <span class="error help-block">{{errors.title}}</span>
+                {{/if}}
+              </div>
+              <div class="field {{if errors.image_url "error"}}">
+                <label>Image URL</label>{{input value=model.image_url placeholder="Image URL"}}
+                {{#if errors.image_url}}
+                  <span class="error help-block">{{errors.image_url}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          <div class="field {{if errors.description "error"}}">
+            <label>Description</label>{{textarea rows="7" value=model.description}}
+            {{#if errors.description}}
+              <span class="error help-block">{{errors.description}}</span>
+            {{/if}}
+          </div>
+          <div class="field">
+            <div class="ui segment">
+              <div class="ui two column very relaxed grid">
+                <div class="column field {{if errors.existing_category "error"}}">
+                  <label>Category</label>
+                  <CategoriesMenu class="column field" @selectedElem={{this.selectedCategory}} @errors={{errors}} {{action "clearNew" on="focusIn"}} @selfReference={{this.categoriesMenu}}>
+                  </CategoriesMenu>
+                </div>
+                <div class="column field {{if errors.new_category "error"}}">
+                  <label>New Category</label>
+                  <Input placeholder="Category Name" @value={{newCategory}} {{action "clearCatList" on="focusIn"}}></Input>
+                  {{#if errors.new_category}}
+                    <span class="error help-block">{{errors.new_category}}</span>
+                  {{/if}}
+                </div>
+              </div>
+              <div class="ui vertical divider">Or</div>
+            </div>
+          </div>
+          <div class="inline field">
+            <div class="ui toggle checkbox" {{action "toggleVisible" on="click"}}>
+              {{input type="checkbox" tabindex="0" class="hidden" checked=isVisible}}
+              <label>Visible</label>
+            </div>
+          </div>
+          <div class="ui relaxed items">
+            <div class="item">
+              <div class="content">
+                <div class="ui buttons right floated">
+                  <button class="ui button" {{action "index"}}>Cancel</button>
+                  <div class="or"></div>
+                  <button type="submit" class="ui animated positive button">
+                    <div class="visible content">Add</div>
+                    <div class="hidden content">
+                      <i class="plus icon"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

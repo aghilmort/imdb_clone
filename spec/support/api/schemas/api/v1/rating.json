@@ -1,0 +1,22 @@
+{
+  "id": "file:/api/v1/rating.json#",
+  "type": "object",
+  "required": [
+    "id",
+    "created_at",
+    "updated_at",
+    "description",
+    "movie_id",
+    "user_id",
+    "score"
+  ],
+  "properties": {
+    "id": { "type": "integer" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "description": { "type": "string" },
+    "movie_id": { "type": "integer" },
+    "user_id": { "type": "integer" },
+    "score": { "type": "string" }
+  }
+}

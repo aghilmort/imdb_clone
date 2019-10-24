@@ -1,0 +1,43 @@
+{
+  "id": "file:/api/v1/category.json#",
+  "type": "object",
+  "required": ["attributes", "relationships"],
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "required": [
+        "description",
+        "id",
+        "image_url",
+        "slug",
+        "sub_category_slug",
+        "sub_category_title",
+        "title"
+      ],
+      "properties": {
+        "description": { "type": "string" },
+        "id": { "type": "integer" },
+        "image_url": { "type": "string" },
+        "slug": { "type": "string" },
+        "sub_category_slug": { "type": "string" },
+        "sub_category_title": { "type": "string" },
+        "title": { "type": "string" }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "required": ["movies"],
+      "properties": {
+        "movies": {
+          "type": "object",
+          "required": ["data"],
+          "properties": {
+            "data": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    }
+  }
+}

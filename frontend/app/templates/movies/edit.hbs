@@ -1,0 +1,93 @@
+<div class="ui very padded vertical stripe segment">
+  <div class="ui vertically padded grid">
+    <div class="column">
+      <div class="ui container">
+        <h2 class="ui header">Edit: "{{model.title}}"</h2>
+        <div class="ui segment">
+          <img src={{model.image_url}} alt="Movie Poster" width="100%">
+        </div>
+        <form class="ui form" {{action "update" on="submit"}}>
+          <div class="ui red right floated button" {{action "openModal" "deletemovie"}}>
+            <i class="trash alternate icon"></i>Delete
+          </div>
+          {{#ui-modal name="deletemovie" class="deletemovie" onApprove=(action "approveModal") onDeny=(action "denyModal")}}
+            <i class="close icon"></i>
+            <div class="header">Delete Movie</div>
+            <div class="content">
+              <div class="description">
+                <p>Are you sure you'd like to delete this movie? This action cannot be undone. If you think that you may need it in the future you can switch off the "Visible" toggle button on this page. This will hide it from all views until reactivated again.</p>
+              </div>
+            </div>
+            <div class="actions">
+              <div class="ui black deny button">Cancel</div>
+              <div class="ui negative right labeled icon approve button">
+                Delete Movie
+                <i class="trash alternate icon"></i>
+              </div>
+            </div>
+          {{/ui-modal}}
+          <div class="field">
+            <div class="two fields">
+              <div class="field {{if errors.title "error"}}">
+                <label>Title</label>
+                {{input value=model.title placeholder="Movie Title"}}
+                {{#if errors.title}}
+                  <span class="error help-block">{{errors.title}}</span>
+                {{/if}}
+              </div>
+              <div class="field {{if errors.image_url "error"}}">
+                <label>Image URL</label>
+                {{input value=model.image_url placeholder="Image URL"}}
+                {{#if errors.image_url}}
+                  <span class="error help-block">{{errors.image_url}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          <div class="field {{if errors.description "error"}}">
+            <label>Description</label>
+            {{textarea rows="7" value=model.description}}
+            {{#if errors.description}}
+              <span class="error help-block">{{errors.description}}</span>
+            {{/if}}
+          </div>
+          <div class="field">
+            <div class="ui segment">
+              <div class="ui two column very relaxed grid">
+                <div class="column field {{if errors.existing_category "error"}}">
+                  <label>Category</label>
+                  <CategoriesMenu class="column field" @selectedElem={{this.selectedCategory}} @errors={{errors}} {{action "clearNew" on="focusIn"}} @selfReference={{this.categoriesMenu}}></CategoriesMenu>
+                </div>
+                <div class="column field {{if errors.new_category "error"}}">
+                  <label>New Category</label>
+                  <Input placeholder="Category Name" @value={{newCategory}} {{action "clearCatList" on="focusIn"}}></Input>
+                  {{#if errors.new_category}}
+                    <span class="error help-block">{{errors.new_category}}</span>
+                  {{/if}}
+                </div>
+              </div>
+              <div class="ui vertical divider">Or</div>
+            </div>
+          </div>
+          <div class="inline field">
+            <div class="ui toggle checkbox" {{action "toggleVisible" on="click"}}>
+              <Input type="checkbox" tabindex="0" class="hidden" checked={{model.visible}}></Input>
+              <label>Visible</label>
+            </div>
+          </div>
+          <div class="ui relaxed items">
+            <div class="item">
+              <div class="content">
+                <div class="ui buttons right floated">
+                  <button class="ui button" {{action "index"}}>Cancel</button>
+                  <div class="or"></div>
+                  <button type="submit" class="ui positive button">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

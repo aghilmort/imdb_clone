@@ -1,0 +1,38 @@
+<img class="ui fluid hero-image image" src={{model.image_url}} alt="Hero Image">
+<div class="ui very padded vertical stripe basic segment">
+  <div class="ui vertically padded grid">
+    <div class="column">
+      <div class="ui container">
+        <h2 class="ui header">"{{model.title}}"</h2>
+        {{#if session.isAuthenticated}}
+          <span>
+            Your rating:
+            <MovieRating @movie={{model}} @rating={{model.current_user_rating.score}}></MovieRating>
+          </span>
+          <br>
+          <br>
+        {{/if}}
+        <span>
+          Average rating:
+          <i>{{rating-formatter model.average_rating}}</i>
+          <br>{{star-rating model.average_rating width=14 fillColor="#f2711c" anyPercent=true numStars=10 readOnly=true}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui container">
+  <div class="extra">
+    <div>Category: {{model.category.title}}</div>
+    <div>Subcategory: {{model.category.sub_category_title}}</div>
+  </div>
+</div>
+<div class="ui very padded vertical basic segment">
+  <div class="ui vertically padded grid">
+    <div class="column">
+      <div class="ui container">
+        <div class="description">{{model.description}}</div>
+      </div>
+    </div>
+  </div>
+</div>

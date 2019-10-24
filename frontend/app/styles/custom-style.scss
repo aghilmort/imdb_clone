@@ -1,0 +1,63 @@
+@media (min-width: 477px) {
+ 	main {
+		padding-bottom: 730px !important;
+  }
+}
+
+@media (min-width: 767px) {
+ 	main {
+		padding-bottom: 270px !important;
+  }
+}
+
+@media (min-width: 979px) {
+ 	main {
+		padding-bottom: 250px !important;
+  }
+}
+
+.ember-view {
+	position: relative !important;
+	min-height: 100% !important;
+}
+
+.help-block {
+	display: block;
+	margin-bottom: .5em;
+	font-size: .9285em;
+	color: #d95c5c;
+	opacity: .6;
+	padding-left: 5px;
+}
+
+.ui.toggle.checkbox input:checked ~ .box:before, .ui.toggle.checkbox input:checked ~ label:before {
+	background-color: #16ab39 !important;
+}
+
+.deletemovie {
+	height: auto !important;
+	top: 20% !important;
+}
+
+.hero-image {
+  -webkit-clip-path: polygon(0 0, 100% 100%, 100% 50%, 0 100%);
+  clip-path: polygon(0 0, 100% 100%, 100% 50%, 0 100%);
+}
+
+.footer {
+	position: absolute !important;
+	bottom: 0 !important;
+	width: 100%;
+}
+
+input[type="text"] {
+	min-height: auto !important;
+}
+
+.filters-segment {
+	padding-bottom: 0px !important;
+}
+
+.bs-carousel-custom {
+	width: 100%;
+}

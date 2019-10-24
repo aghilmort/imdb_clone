@@ -1,0 +1,39 @@
+{{#ui-dropdown class="search selection"
+    allowAdditions=true
+    selected=selectedElem
+    onChange=(action "grabValue")}}
+  <div class="default text">All categories ...</div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+    {{#each categoriesBySlug as |categoryGroup|}}
+
+      {{#if withLinks}}
+        <LinkTo class="item" @route="genres" @model={{categoryGroup.value}}>
+          <div class="item">
+            <b>{{humanize categoryGroup.value}}</b>
+          </div>
+        </LinkTo>
+      {{else}}
+        <div data-value={{categoryGroup.value}} class="item">
+          <b>{{humanize categoryGroup.value}}</b>
+        </div>
+      {{/if}}
+
+      {{#each categoryGroup.items as |category|}}
+        {{#if withLinks}}
+          <a class="item" href="/genres/{{categoryGroup.value}}/{{category.sub_category_slug}}">
+            <div class="item">
+              {{humanize category.sub_category_slug}}
+            </div>
+          </a>
+        {{else}}
+          <div data-value="{{categoryGroup.value}}|{{category.sub_category_slug}}" class="item">
+            {{humanize category.sub_category_slug}}
+          </div>
+        {{/if}}
+      {{/each}}
+
+    {{/each}}
+  </div>
+{{/ui-dropdown}}
+{{#if errors.existing_category}}<span class="error help-block">{{errors.existing_category}}</span>{{/if}}

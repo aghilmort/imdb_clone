@@ -1,0 +1,73 @@
+<div class="ui attached stackable menu">
+  <div class="ui container">
+    {{#link-to "movies.index" class="item"}}
+      <i class="home icon"></i>Home
+    {{/link-to}}
+    <div class="right menu">
+      {{#if session.isAuthenticated}}
+        {{#if (eq session.data.authenticated.role 'admin')}}
+          <div class="ui simple dropdown item">
+            Admin <i class="dropdown icon"></i>
+            <div class="menu">
+              <a class="item" href="/admin/hidden">Hidden Movies</a>
+            </div>
+          </div>
+        {{/if}}
+        <a class="item" {{action "logout"}}>
+          <i class="sign out icon"></i>Logout
+        </a>
+      {{else}}
+        <a class="item" {{action "login"}}>
+          <i class="sign in icon"></i>Login
+        </a>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+<main role="main">
+  {{outlet}}
+</main>
+
+<div class="ui inverted vertical footer segment">
+  <div class="ui container">
+    <div class="ui stackable inverted divided equal height stackable grid">
+      <div class="three wide column">
+        <a class="item" href="/genres/action"><h4 class="ui teal header">Action</h4></a>
+        <div class="ui inverted link list">
+          <a class="item" href="/genres/action/heroic-bloodshed">Heroic bloodshed</a>
+          <a class="item" href="/genres/action/military-fiction">Military fiction</a>
+          <a class="item" href="/genres/action/spy-fiction">Spy fiction</a>
+          <a class="item" href="/genres/action/wuxia">Wuxia</a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <a class="item" href="/genres/comedy"><h4 class="ui teal header">Comedy</h4></a>
+        <div class="ui inverted link list">
+          <a class="item" href="/genres/comedy/comedy-of-manners">Comedy of manners</a>
+          <a class="item" href="/genres/comedy/humorous">Humorous</a>
+          <a class="item" href="/genres/comedy/tall-tale">Tall tale</a>
+          <a class="item" href="/genres/comedy/parody">Parody</a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <a class="item" href="/genres/crime"><h4 class="ui teal header">Crime</h4></a>
+        <div class="ui inverted link list">
+          <a class="item" href="/genres/crime/courtroom-drama">Courtroom drama</a>
+          <a class="item" href="/genres/crime/detective-story">Detective story</a>
+          <a class="item" href="/genres/crime/gangster">Gangster</a>
+          <a class="item" href="/genres/crime/gentleman-thief">Gentleman thief</a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <a class="item" href="/genres/fantasy"><h4 class="ui teal header">Fantasy</h4></a>
+        <div class="ui inverted link list">
+          <a class="item" href="/genres/fantasy/bangsian">Bangsian</a>
+          <a class="item" href="/genres/fantasy/contemporary-fantasy">Contemporary fantasy</a>
+          <a class="item" href="/genres/fantasy/dark-fantasy">Dark fantasy</a>
+          <a class="item" href="/genres/fantasy/fables">Fables</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

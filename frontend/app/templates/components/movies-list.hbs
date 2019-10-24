@@ -1,0 +1,106 @@
+{{#if (gt model.length 0)}}
+  <div class="ui vertical basic segment">
+    {{!-- <div class="ui relaxed grid container"> --}}
+      <BsCarousel
+        class="bs-carousel-custom"
+        @autoPlay={{true}}
+        @wrap={{true}}
+        @index={{0}}
+        @interval={{5000}}
+        @keyboard={{true}}
+        @ltr={{true}}
+        @pauseOnMouseEnter={{true}}
+        @showControls={{true}}
+        @showIndicators={{true}}
+        as |car|>
+        {{#each model as |movie|}}
+          <car.slide>
+            <img alt={{movie.title}} src={{movie.image_url}}>
+          </car.slide>
+        {{/each}}
+      </BsCarousel>
+    {{!-- </div> --}}
+  </div>
+{{/if}}
+
+{{genres-filters}}
+
+{{#if (eq model.length 0)}}
+  <div class="ui very padded vertical stripe segment">
+    <div class="ui container">
+      <div class="ui teal message">
+        <div class="header">No movies in this category yet!</div>
+        <p>We didn't find any movies in this category. If you have the right privileges you can start adding movies now!</p>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="ui vertical basic segment">
+    {{#if (gt model.meta.total_count model.meta.per_page)}}
+      <div class="ui container right aligned">
+        <PageNumbers @content={{model}} @showFL={{true}}></PageNumbers>
+      </div>
+    {{/if}}
+
+    {{#if (eq session.data.authenticated.role "admin")}}
+      <div class="ui container">
+        <button class="ui positive button" {{action "new"}}>+ Add</button>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="ui vertical basic segment">
+    <div class="ui container">
+      <div class="ui three stackable cards">
+
+        {{#each model as |movie|}}
+          <div class="ui card">
+            <div class="content">
+              {{#if (eq session.data.authenticated.role "admin")}}
+                <a class="item">
+                  <i class="right floated edit icon" {{action "editMovie" movie.id on="click"}}></i>
+                </a>
+              {{/if}}
+              <div class="header"><i class="film icon"></i> {{movie.title}}</div>
+            </div>
+            <div class="image">
+              <img alt={{movie.title}} src={{movie.image_url}} width="150">
+            </div>
+            <div class="content">
+              <div class="description">{{movie.description}}</div>
+            </div>
+            <div class="extra">
+              {{#if session.isAuthenticated}}
+                <span class="black">
+                  Average rating: <i>{{rating-formatter movie.average_rating}}</i>
+                </span><br>               
+                <span>
+                  Your rating: <i>{{rating-formatter movie.current_user_rating.score}}</i><br>
+                  <MovieRating @movie={{movie}}></MovieRating>
+                </span>
+              {{else}}
+                <span>
+                  Average rating: <i>{{rating-formatter movie.average_rating}}</i><br>
+                  {{star-rating movie.average_rating width=14 fillColor="#f2711c" anyPercent=true numStars=10 readOnly=true}}
+                </span>
+              {{/if}}
+            </div>
+            <div class="ui bottom attached teal button" {{action "showMovie" movie.id on="click"}}>
+              <i class="eye icon"></i>
+              Details
+            </div>
+          </div>
+        {{/each}}
+
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe right aligned segment">
+    <div class="ui container">
+      {{#if (gt model.meta.total_count model.meta.per_page)}}
+        <PageNumbers @content={{model}} @showFL={{true}}></PageNumbers>
+      {{/if}}
+    </div>
+  </div>
+{{/if}}

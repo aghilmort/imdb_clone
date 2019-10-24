@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "id": "file:/api/v1/movies/index.json#",
+  "type": "object",
+  "required": ["data"],
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "file:/api/v1/movie.json#"
+      }
+    },
+    "included": {
+      "type": "array"
+    }
+  }
+}

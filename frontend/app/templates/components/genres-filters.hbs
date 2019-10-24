@@ -1,0 +1,90 @@
+<div class="ui very padded vertical stripe basic segment filters-segment">
+  <div class="ui vertically padded grid">
+    <div class="column">
+      <div class="ui container">
+
+        {{#ui-accordion}}
+          <div class="title">
+            <h4 class="ui horizontal divider header dropdown">
+              <i class="center filter icon"></i>
+              Filter Movies
+            </h4>
+          </div>
+          <div class="content">
+
+            <div class="ui four column padded relaxed equal height divided grid">
+              <div class="padded center aligned row">
+                <div class="padded column">
+                  <a class="item" href="/genres/action"><h4 class="ui header">Action</h4></a>
+                  <div class="ui link list">
+                    <a class="item" href="/genres/action/heroic-bloodshed">Heroic bloodshed</a>
+                    <a class="item" href="/genres/action/military-fiction">Military fiction</a>
+                    <a class="item" href="/genres/action/spy-fiction">Spy fiction</a>
+                    <a class="item" href="/genres/action/wuxia">Wuxia</a>
+                  </div>
+                </div>
+                <div class="column">
+                  <a class="item" href="/genres/comedy"><h4 class="ui header">Comedy</h4></a>
+                  <div class="ui link list">
+                    <a class="item" href="/genres/comedy/comedy-of-manners">Comedy of manners</a>
+                    <a class="item" href="/genres/comedy/humorous">Humorous</a>
+                    <a class="item" href="/genres/comedy/tall-tale">Tall tale</a>
+                    <a class="item" href="/genres/comedy/parody">Parody</a>
+                  </div>
+                </div>
+                <div class="column">
+                  <a class="item" href="/genres/crime"><h4 class="ui header">Crime</h4></a>
+                  <div class="ui link list">
+                    <a class="item" href="/genres/crime/courtroom-drama">Courtroom drama</a>
+                    <a class="item" href="/genres/crime/detective-story">Detective story</a>
+                    <a class="item" href="/genres/crime/gangster">Gangster</a>
+                    <a class="item" href="/genres/crime/gentleman-thief">Gentleman thief</a>
+                  </div>
+                </div>
+                <div class="column">
+                  <a class="item" href="/genres/fantasy"><h4 class="ui header">Fantasy</h4></a>
+                  <div class="ui link list">
+                    <a class="item" href="/genres/fantasy/bangsian">Bangsian</a>
+                    <a class="item" href="/genres/fantasy/contemporary-fantasy">Contemporary fantasy</a>
+                    <a class="item" href="/genres/fantasy/dark-fantasy">Dark fantasy</a>
+                    <a class="item" href="/genres/fantasy/fables">Fables</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui one column padded relaxed equal height divided grid">
+              <div class="padded center aligned row">
+                <div class="padded column">
+                  {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type_addition onChange=(action (mut selected_type_addition))}}
+                    <div class="default text">All categories ...</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      {{#each categoriesBySlug as |categoryGroup|}}
+                        <LinkTo class="item" @route="genres" @model={{categoryGroup.value}}>
+                          <div data-value="" class="item">
+                            <b>{{humanize categoryGroup.value}}</b>
+                          </div>
+                        </LinkTo>
+
+                        {{#each categoryGroup.items as |category|}}
+                          <a class="item" href="/genres/{{categoryGroup.value}}/{{category.sub_category_slug}}">
+                            <div data-value="" class="item">
+                              {{humanize category.sub_category_slug}}
+                            </div>
+                          </a>
+                        {{/each}}
+                      {{/each}}
+                    </div>
+                  {{/ui-dropdown}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        {{/ui-accordion}}
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="ui very padded vertical stripe center aligned segment">
+  <div class="ui container">
+    <div class="ui two column centered grid">
+      <div class="column">
+        <h2 class="ui image header">
+          <img src="../favicon.ico" class="image" alt="favicon">
+          <div class="content">Log-in to your account</div>
+        </h2>
+        <form class="ui large form">
+          <div class="ui stacked segment">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                {{input type="text" name="email" value=identification placeholder="E-mail address"}}
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>{{input type="password" name="password" value=password placeholder="Enter Password"}}
+              </div>
+            </div>
+            <div class="ui fluid large teal submit button" {{action "authenticate"}}>Login</div>
+          </div>
+          {{#if errorMessage}}
+            <div class="ui error message visible">{{errorMessage}}</div>
+          {{/if}}
+        </form>
+        <div class="ui message">
+          New to us?
+          <a href="#">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
